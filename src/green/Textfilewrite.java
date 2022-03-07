@@ -1,0 +1,119 @@
+package green;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+
+import org.apache.commons.io.FileUtils;
+
+
+public class Textfilewrite {
+
+	String outputfile="C:\\\\Users\\\\sathishkumar\\\\eclipse-workspace\\\\JAVABasics\\\\output\\\\output1.txt";
+	String filepath="C:\\Users\\sathishkumar\\eclipse-workspace\\JAVABasics\\inputfiles\\inputfile.txt";
+	
+	public void writeintotextfile()
+	{
+		try {  
+			File f = new File(outputfile);
+			if(f.exists()==false)
+			{
+			f.createNewFile();
+			}
+			FileOutputStream outputStream = new FileOutputStream(f);  
+			//Writer outputStreamWriter = new OutputStreamWriter(outputStream);  
+			outputStream.write(84);  
+			outputStream.close(); 
+			System.out.println("done");
+        } catch (Exception e) {  
+            e.getMessage();  
+        }  
+	}
+	
+	public void copyfile()
+	{
+		File f= new File(filepath);
+		File fout= new File(outputfile);
+		try {
+			FileUtils.copyFile(f, fout);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println("done");
+	}
+	
+	public void writeintotextfilebybyte()
+	{
+	     String s="Welcome to Besant."
+	     		+ "sathish kumar today";    
+		try {  
+			File f = new File(outputfile);
+			if(f.exists()==false)
+			{
+			f.createNewFile();
+			}
+			FileOutputStream outputStream = new FileOutputStream(f);  
+			//Writer outputStreamWriter = new OutputStreamWriter(outputStream);  
+			byte b[]=s.getBytes();//converting string into byte array    
+			outputStream.write(b);  
+			outputStream.close(); 
+			System.out.println("done");
+        } catch (Exception e) {  
+            e.getMessage();  
+        }  
+	}
+	
+	public void writebyfilewriter()
+	{
+	     String s="Welcome to Besant. done";    
+		try {  
+			File f = new File(outputfile);
+			if(f.exists()==false)
+			{
+			f.createNewFile();
+			}
+			FileWriter FL = new FileWriter(f);     
+			FL.write(s);
+			FL.close(); 
+			System.out.println("done");
+        } catch (Exception e) {  
+            e.getMessage();  
+        }  
+	}
+	
+	public void readandwrite() throws IOException
+	{
+		File f= new File(filepath);
+		File fout= new File(outputfile);
+		fout.createNewFile();
+		FileReader fr = new FileReader(f);
+		BufferedReader br=new BufferedReader(fr); 
+		FileOutputStream outputStream = new FileOutputStream(fout);  
+		//Writer outputStreamWriter = new OutputStreamWriter(outputStream);  
+		
+		  String i;
+			    while ((i=br.readLine()) != null)
+			    {
+			    	byte b[]=i.getBytes();//converting string into byte array    
+					outputStream.write(b);  
+					 
+			    	 
+			    }
+			    outputStream.close();
+			    fr.close();
+			    System.out.println("completed");
+	}
+	
+	
+	public static void main(String[] args) throws IOException {
+		// TODO Auto-generated method stub
+		Textfilewrite tf=  new Textfilewrite();
+		tf.copyfile();
+	}
+
+}
